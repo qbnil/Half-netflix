@@ -1,0 +1,10 @@
+name: kinopoisk
+recipe: lamp
+config:
+  php: 8.2
+  webroot: .
+
+services:
+  database:
+    type: postgres
+    portforward: 3307
