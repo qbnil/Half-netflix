@@ -1,10 +1,12 @@
 <?php
 
+use App\RouteHandler\Route;
+
 return [
-    '/home' => function () {
+    Route::get('/home', function () {
         include_once APP_PATH.'/templates/pages/home.php';
-    },
-    '/movies' => function () {
+    }),
+    Route::get('/movies', function () {
         include_once APP_PATH.'/templates/pages/movies.php';
-    },
+    }),
 ];
