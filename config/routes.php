@@ -2,9 +2,9 @@
 
 return [
     '/home' => function () {
-        echo '<h2>Its home here</h2>';
+        include_once __DIR__.'/../templates/pages/home.php';
     },
     '/movies' => function () {
-        echo '<h2>Movies page</h2>';
+        include_once __DIR__.'/../templates/pages/movies.php';
     },
 ];
