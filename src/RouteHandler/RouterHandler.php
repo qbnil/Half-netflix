@@ -2,6 +2,8 @@
 
 namespace App\RouteHandler;
 
+use Couchbase\PathNotFoundException;
+
 class RouterHandler
 {
     private array $routes = [
@@ -14,11 +16,32 @@ class RouterHandler
         $this->initRoutes();
     }
 
-    public function dispatch(string $uri): void
+    public function dispatch(string $uri, string $method): void
     {
+        $route = $this->findRoute($uri, $method);
+        if (! $route) {
+
+        }
         $routes = $this->getRoutes();
         $routes[$uri]();
 
+    }
+
+    private function findRoute(string $uri, string $method): Route
+    {
+        if (! isset($this->routes[$method][$uri])) {
+            return $this->notFound();
+        }
+
+        return $this->routes[$method][$uri];
+
+    }
+
+    private function notFound()
+    {
+        $notFound = new PathNotFoundException();
+
+        return $notFound->getMessage();
     }
 
     /**
