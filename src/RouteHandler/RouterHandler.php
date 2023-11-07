@@ -20,28 +20,26 @@ class RouterHandler
     {
         $route = $this->findRoute($uri, $method);
         if (! $route) {
-
+            $this->notFound();
         }
-        $routes = $this->getRoutes();
-        $routes[$uri]();
+        $route->getAction()();
 
     }
 
-    private function findRoute(string $uri, string $method): Route
+    private function findRoute(string $uri, string $method): Route|false
     {
         if (! isset($this->routes[$method][$uri])) {
-            return $this->notFound();
+            return false;
         }
 
         return $this->routes[$method][$uri];
 
     }
 
-    private function notFound()
+    private function notFound(): PathNotFoundException
     {
-        $notFound = new PathNotFoundException();
-
-        return $notFound->getMessage();
+        echo '404|Not Found';
+        exit;
     }
 
     /**
